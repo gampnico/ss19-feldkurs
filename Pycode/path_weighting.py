@@ -55,8 +55,8 @@ def effective_z(path_height, path_position):
 
     """
     # b = 1  # No height dependency
-    b = -2 / 3  # Stable
-    # b = - 4/3  # Unstable
+    b = - 2 / 3  # Stable
+    # b = - 4 / 3  # Unstable
     ph_list = np.multiply(path_height ** b, pwf(path_position))
     z_eff = ((sp.integrate.trapz(ph_list)) / (sp.integrate.trapz(pwf(
         path_position)))) ** (1 / b)
