@@ -25,7 +25,7 @@ end
 % southerly alignment
 z_aligned = flipud(z);
 z_transect = z_aligned(ii);
-
+z_transect = z(ii); % if incorrect path
 %% Calculate path distances
 dx = max(x)-min(x);
 dy = max(y)-min(y);

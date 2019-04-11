@@ -8,25 +8,31 @@ addpath("topo");    % path to data files
 
 % Calculate coordinates from https://epsg.io/31254 
 uni = [79638 236722];   % University roof vector
-% % Receiver vectors:
+% Receiver vectors:
 % hungerburg = [80718 239124]; % Hoehenstrasse 151
-tautermann = [79772 237360]; % Stamser Feld 5
-receiver_location = tautermann;
+% tautermann = [79772 237360]; % Stamser Feld 5
+schiesstand = [78881 237443]; % Hotel Schiesstand
+receiver_location = schiesstand;
 
-% x_vector = [uni(1) receiver_location(1)];
-% y_vector = [uni(2) receiver_location(2)];
+if uni(1)< receiver_location(1)
+    x_vector = [uni(1) receiver_location(1)];
+else
+    x_vector = [receiver_location(1) uni(1)];
+end
+
+y_vector = [uni(2) receiver_location(2)];
 
 %% Parse file
 
 % Use preloaded data
-load("hungerburg.mat");
+load("schiesstand.mat");
 name = terrain.name;
 
 % Generate new data
 % [xx, yy, zz] = read_tirol_dgm(x_vector, y_vector);
-% terrain.name = "Hotel Tautermann";
+% terrain.name = "Hotel Schiesstand";
 % terrain.xx = xx;
-% terrain.yy = yy;`
+% terrain.yy = yy;
 % terrain.zz = zz;
 
 %% Get transect
@@ -35,7 +41,7 @@ name = terrain.name;
 %% Plot data
 
 % plotpaths(terrain structure, plot topography, plot transect)
-x_geo = plotpaths(terrain, 0, 0);
+x_geo = plotpaths(terrain, 1, 1);
 
 for i = 1:1:length(x_geo)
     path_function(i) = terrain.z_transect(1) + (terrain.z_transect(end) - terrain.z_transect(1))/(max(x_geo)-min(x_geo)) * x_geo(i);
