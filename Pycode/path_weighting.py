@@ -57,20 +57,32 @@ def effective_z(path_height, path_position):
     # b = 1  # No height dependency
     b = - 2 / 3  # Stable
     # b = - 4 / 3  # Unstable
-    ph_list = np.multiply(path_height ** b, pwf(path_position))
+    ph_list = (np.multiply(path_height ** b, pwf(path_position)))
+
+    # For path-building intersections
+    ph_list[np.isnan(ph_list)] = 0
     z_eff = ((sp.integrate.trapz(ph_list)) / (sp.integrate.trapz(pwf(
         path_position)))) ** (1 / b)
+    test = (sp.integrate.trapz(ph_list)) / (sp.integrate.trapz(pwf(
+        path_position)))
+    print(test)
+
     return z_eff
 
 
 path_height_data = pd.read_csv(
-    "../MATLAB/path_height.csv", header=None,
+    "../MATLAB/path_height_schiessstand.csv", header=None,
     names=["path_height", "norm_position"])
 
 effective_path_height = effective_z(
     path_height_data["path_height"], path_height_data["norm_position"])
 
 mean_path_height = np.mean(path_height_data["path_height"])
+path_weight = pwf(path_height_data["norm_position"])
+path_height_data["path_weight"] = path_weight
 
 print("Mean path height: " + str(mean_path_height) + "m")
 print("Effective path height: " + str(effective_path_height) + "m")
+# For Matlab export
+# path_height_data.to_csv(path_or_buf="../MATLAB/hungerburg_sim.csv",
+#                         index=None)
