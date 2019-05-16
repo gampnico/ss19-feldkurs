@@ -46,6 +46,7 @@ end
 %% Transect map
 if trans_arg == 1
     figure(2);
+    terrain.z_transect=fliplr(terrain.z_transect);
     %normalise path distance when plotting
     x_geo = 1:terrain.path_geo / length(terrain.z_transect):terrain.path_geo;
     plot(x_geo, terrain.z_transect, "Color", "k");
@@ -56,6 +57,7 @@ if trans_arg == 1
     title(terrain.name);
     text(double(x_geo(end)/2), double(mean(...
         [max(terrain.z_transect) min(terrain.z_transect)],2)), num2str(ceil(terrain.path_length)) + "m");
+    xlim([0 max(x_geo)])
 end
 
 end
