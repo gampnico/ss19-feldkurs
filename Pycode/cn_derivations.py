@@ -22,7 +22,7 @@ def derive_ct2(data_file):
     # scrub extra characters from file name
     day = re.sub("[^0-9\-]", "", data_file)
     # placeholder until we can access acinn data
-    acinn_data = dp.weather_parsing(day, "off")
+    acinn_data = dp.weather_parsing(day, "on")
 
     derived = scint_data.filter(["Cn2", "temp", "pressure"], axis=1)
     kelvin = 273.15
