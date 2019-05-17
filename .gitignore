@@ -106,4 +106,4 @@ venv.bak/
 # Data files
 topo/
 .csv
-.ipynb
+data/
