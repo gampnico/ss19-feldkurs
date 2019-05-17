@@ -1,16 +1,19 @@
+#!/usr/bin/env python3
+"""Nicolas Gampierakis (2019). Downloads external weather data.
+"""
+
 import socket
 import sys
 import time
 import urllib.error
 import urllib.request
-import pathlib
 
 
 def progress_bar(packet_number, packet_size, total_size):
     """Custom reporthook for displaying download progress bar. Called as a
     default keyword argument by download_database().
 
-    Parameters:
+    Args:
         packet_number (int): number of data packets transferred from server
             to client
         packet_size (int): size of data packet
@@ -39,12 +42,9 @@ def progress_bar(packet_number, packet_size, total_size):
 
 
 def download_database(server_path, client_path):
-    """Downloads and extracts GeoNames database into client directory. Called
-    by verify_update() if a database update is required.
+    """Downloads and extracts database into client directory.
 
-    Parameters:
-        client_path (pathlib.PurePath): the file path to the client's
-            GeoName database directory
+    Args:
         client_path (pathlib.PurePath): the file path to the client's
         downloaded database
         server_path (str): the url path to the server database
