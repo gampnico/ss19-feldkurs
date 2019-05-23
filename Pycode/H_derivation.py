@@ -69,4 +69,6 @@ else:
 # length z_0 are required.
 z_0 = 0.1 * z_u
 
+u_star = k * computed_data["windspeed] / (math.log(z_u / z_0) - psi_M)
+
 

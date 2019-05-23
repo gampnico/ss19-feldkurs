@@ -53,7 +53,7 @@ def weather_parsing(day, connect="off"):
     """
 
     # Matches format used in the weather service files
-    variable_list = ["t", "rf", "wr", "regen", "ldred", "ldstat", "sonne"]
+    variable_list = ["t", "rf", "wr", "wg", "regen", "ldred", "ldstat", "sonne"]
     header_list = ["station_no", "station_name", "number", "date", "time",
                    "variable", "unit", "datetime"]
     weather_data = pd.DataFrame()

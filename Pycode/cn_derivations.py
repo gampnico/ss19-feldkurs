@@ -28,6 +28,7 @@ def derive_ct2(data_file):
     kelvin = 273.15
     derived["temp"] = acinn_data["t"][8] + kelvin
     derived["pressure"] = acinn_data["ldred"][8]
+    derived["windspeed"] = acinn_data["ldred"][8] / 3600
 
     transmit_lambda = 880 * (10 ** -9)  # m
     lambda_2 = 7.53 * (10 ** -3)  # micron^2
