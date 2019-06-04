@@ -17,18 +17,21 @@ def derive_ct2(data_file):
         derived (pandas.dataFrame): data frame containing derived CT^2
             alongside weather conditions
     """
-    scint_data = dp.data_parsing(data_file)
+    scint_data = dp.scintillometer_parse(data_file)
 
     # scrub extra characters from file name
     day = re.sub("[^0-9\-]", "", data_file)
     # placeholder until we can access acinn data
-    acinn_data = dp.weather_parsing(day, "on")
+    acinn_data = dp.weather_download(day, "off")
 
-    derived = scint_data.filter(["Cn2", "temp", "pressure"], axis=1)
+    derived = scint_data.filter(["Cn2"], axis=1)
     kelvin = 273.15
-    derived["temp"] = acinn_data["t"][8] + kelvin
-    derived["pressure"] = acinn_data["ldred"][8]
-    derived["windspeed"] = acinn_data["ldred"][8] / 3600
+    # merge weather and scintillometer data according to datetimes
+    derived = derived.join(acinn_data[["t", "ldred", "wg"]]).rename(columns={
+        "t": "temperature", "ldred": "pressure", "wg": "windspeed"})
+    # adjust values
+    derived["temperature"] = derived["temperature"] + kelvin
+    derived["windspeed"] = derived["windspeed"] / 3.6  # convert to ms^-1
 
     transmit_lambda = 880 * (10 ** -9)  # m
     lambda_2 = 7.53 * (10 ** -3)  # micron^2
@@ -40,7 +43,7 @@ def derive_ct2(data_file):
     # fluctuations - errors should be within 3% of inverse Bowen ratio
     # (Moene 2003)
 
-    derived["CT2"] = derived["Cn2"] * (derived["temp"] ** 4) * (
+    derived["CT2"] = derived["Cn2"] * (derived["temperature"] ** 4) * (
             (alpha_factor_1 * derived["pressure"]) ** -2)
 
     return derived
