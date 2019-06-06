@@ -55,9 +55,6 @@ def obukhov_iteration(row_index, inital_length=-1000.0):
                 1 + 7 * zeta + 20 * zeta ** 2) ** (
                       -1 / 3)
 
-    # Calculate temperature scale θ* with measured CT2
-    computed_data["theta_star"] = np.sqrt(
-        (computed_data["CT2"].loc[row_index] * (z_eff ** (2 / 3))) / f_H)
     # Calculate corresponding value for Ψ_M for unstable conditions
     # using L_Ob and the height of the wind sensor z_u.
     z_u = 579  # from ZAMG
@@ -73,11 +70,15 @@ def obukhov_iteration(row_index, inital_length=-1000.0):
     else:
         psi_M = 4.7 * zeta
 
-    # Calculate friction velocity u*. Horizontal wind speed U(z_u)
     # roughness length z_0 are required.
     z_0 = 0.1 * z_u
 
-    computed_data["u_star"] = k * computed_data[
+    # Calculate temperature scale θ* with measured CT2
+    computed_data["theta_star"].loc[row_index] = np.sqrt(
+        (computed_data["CT2"].loc[row_index] * (z_eff ** (2 / 3))) / f_H)
+
+    # Calculate friction velocity u*. Horizontal wind speed U(z_u)
+    computed_data["u_star"].loc[row_index] = k * computed_data[
         "windspeed"].loc[row_index] / (math.log(z_u / z_0) - psi_M)
 
     # Calculate Obukhov length
@@ -92,7 +93,8 @@ filename = "2019-05-24"
 
 z_eff = pw.return_z_effective(station)
 computed_data = free_flux_compute(filename)
-
+computed_data["theta_star"] = 0
+computed_data["u_star"] = 0
 print("Iteration started...\n")
 for index, row in computed_data.iterrows():
     # Initialise first iteration step
