@@ -6,6 +6,7 @@ import pathlib
 
 import download_weather as dw
 import pandas as pd
+import os
 
 
 def scintillometer_parse(filename):
@@ -61,11 +62,13 @@ def weather_download(day, connect="off"):
     header_list = ["station_no", "station_name", "number", "date", "time",
                    "variable", "unit", "datetime"]
     weather_data = pd.DataFrame()
+    dir_path = pathlib.Path.cwd().joinpath("weather_data/" + str(day))
+    dir_path.mkdir(parents=True, exist_ok=True)
 
     # Download observations for each variable
     for variable in variable_list:
-        client_path = pathlib.Path.cwd().joinpath("weather_data/" + variable
-                                                  + ".csv")
+        client_path = dir_path.joinpath(variable + ".csv")
+
         if connect == "on":
             server_path = "http://at-wetter.tk/api/v1/station/11121/" \
                           + variable + "/" + day
@@ -77,12 +80,17 @@ def weather_download(day, connect="off"):
         temp_data = pd.read_csv(client_path, header=None, names=header_list,
                                 sep="';'", engine="python")
         temp_data["datetime"] = pd.to_datetime(temp_data["datetime"])
-        temp_data = temp_data.set_index("datetime")
+        temp_data = temp_data.set_index("datetime").shift(-13, freq="S")
         # append to returned data
+        # weather_data[variable] = \
+        #     temp_data["variable"].resample("T").pad().fillna(method="bfill")
         weather_data[variable] = \
-            temp_data["variable"].resample("T").pad().fillna(
-                method="bfill").tz_localize("UTC")
-
+            temp_data["variable"]
+    oidx = weather_data.index
+    nidx = pd.date_range(oidx.min(), oidx.max(), freq='60s')
+    weather_data = weather_data.reindex(oidx.union(nidx)).interpolate(
+        'index').reindex(nidx).tz_localize("UTC")
+    # weather_data = weather_data.interpolate(method="linear")
     return weather_data
 
 
