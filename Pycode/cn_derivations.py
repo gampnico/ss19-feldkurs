@@ -28,8 +28,9 @@ def derive_ct2(data_file):
     derived = scint_data.filter(["Cn2"], axis=1)
     kelvin = 273.15
     # merge weather and scintillometer data according to datetimes
-    derived = derived.join(acinn_data[["t", "ldred", "wg"]]).rename(columns={
-        "t": "temperature", "ldred": "pressure", "wg": "windspeed"})
+    derived = derived.join(acinn_data[["t", "ldred", "wg", "wr"]]).rename(
+        columns={"t": "temperature", "ldred": "pressure", "wg": "windspeed",
+                 "wr": "wind_dir"})
     # adjust values
     derived["temperature"] = derived["temperature"] + kelvin
     derived["windspeed"] = derived["windspeed"] / 3.6  # convert to ms^-1
