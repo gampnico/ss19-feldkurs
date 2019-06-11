@@ -1,0 +1,32 @@
+2018-05-06T03:35:58.650Z	6	INFO	TimeManager	Time correction by +3201d 03:15:04.052 is applied.
+2018-05-06T03:36:02.215Z	7	INFO	ActionController	Starting Manual Alignment.
+2018-05-06T03:42:32.587Z	8	VERBOSE	PackageProcessorController	Processing thread 'ScinInspector ended. It consumed total CPU time: +00:00:00.450.
+2018-05-06T03:42:32.587Z	9	VERBOSE	PackageProcessorController	Processing thread 'ScinMeasureLoop ended. It consumed total CPU time: +00:00:01.371.
+2018-05-06T03:42:32.687Z	10	INFO	ActionController	Stopped Manual Alignment.
+2018-05-06T03:42:36.663Z	11	INFO	ActionController	Starting Manual Alignment.
+2018-05-06T03:45:21.269Z	12	VERBOSE	PackageProcessorController	Processing thread 'ScinMeasureLoop ended. It consumed total CPU time: +00:00:00.470.
+2018-05-06T03:45:21.269Z	13	VERBOSE	PackageProcessorController	Processing thread 'ScinInspector ended. It consumed total CPU time: +00:00:00.000.
+2018-05-06T03:45:21.269Z	14	INFO	ActionController	Stopped Manual Alignment.
+2018-05-06T03:47:34.120Z	15	INFO	ActionController	Starting Manual Alignment.
+2018-05-06T03:51:44.761Z	16	VERBOSE	PackageProcessorController	Processing thread 'ScinMeasureLoop ended. It consumed total CPU time: +00:00:00.680.
+2018-05-06T03:51:44.761Z	17	VERBOSE	PackageProcessorController	Processing thread 'ScinInspector ended. It consumed total CPU time: +00:00:00.000.
+2018-05-06T03:51:44.771Z	18	INFO	ActionController	Stopped Manual Alignment.
+2018-05-06T03:51:48.166Z	19	INFO	ActionController	Starting Measurement.
+2018-05-06T03:59:15.008Z	20	VERBOSE	ConnectionInternal	Disconnecting from 169.254.169.41.
+2018-05-06T03:59:46.453Z	21	VERBOSE	ConnectionInternal	TCP error: Network addresses have changed. Restarting TCP listeners...
+2018-05-06T13:48:00.834Z	22	VERBOSE	ConnectionInternal	Incoming connection from 169.254.169.41.
+2018-05-06T13:48:09.006Z	23	VERBOSE	PackageProcessorController	Processing thread 'ScinSensorLoggerStarter ended. It consumed total CPU time: +00:00:00.020.
+2018-05-06T13:48:09.306Z	24	VERBOSE	PackageProcessorController	Processing thread 'ScinMeasureLoop ended. It consumed total CPU time: +00:00:40.287.
+2018-05-06T13:48:09.326Z	25	VERBOSE	PackageProcessorController	Processing thread 'RawFormat1FilterProcessor ended. It consumed total CPU time: +00:00:00.470.
+2018-05-06T13:48:09.336Z	26	VERBOSE	PackageProcessorController	Processing thread 'DgnGenerator ended. It consumed total CPU time: +01:52:09.756.
+2018-05-06T13:48:09.346Z	27	VERBOSE	PackageProcessorController	Processing thread 'MonitFileWriter ended. It consumed total CPU time: +00:00:01.151.
+2018-05-06T13:48:09.366Z	28	VERBOSE	PackageProcessorController	Processing thread 'DgnFormat1FilterProcessor ended. It consumed total CPU time: +00:00:02.403.
+2018-05-06T13:48:09.366Z	29	VERBOSE	PackageProcessorController	Processing thread 'DgnFileWriter ended. It consumed total CPU time: +00:00:07.080.
+2018-05-06T13:48:09.366Z	30	VERBOSE	PackageProcessorController	Processing thread 'DgnAverager ended. It consumed total CPU time: +00:00:00.721.
+2018-05-06T13:48:09.396Z	31	VERBOSE	PackageProcessorController	Processing thread 'ScinMndGenerator ended. It consumed total CPU time: +00:00:00.811.
+2018-05-06T13:48:09.417Z	32	VERBOSE	PackageProcessorController	Processing thread 'MndFormat1FilterProcessor ended. It consumed total CPU time: +00:00:01.682.
+2018-05-06T13:48:09.417Z	33	VERBOSE	PackageProcessorController	Processing thread 'MndFileWriter ended. It consumed total CPU time: +00:00:03.034.
+2018-05-06T13:48:09.417Z	34	VERBOSE	PackageProcessorController	Processing thread 'ScinInspector ended. It consumed total CPU time: +00:00:28.661.
+2018-05-06T13:48:09.657Z	35	INFO	ActionController	Stopped Measurement.
+2018-05-06T13:48:34.112Z	36	VERBOSE	ConnectionInternal	Connection from 169.254.169.41 closed by remote host.
+2018-05-06T13:48:34.112Z	37	VERBOSE	ConnectionInternal	Disconnecting from 169.254.169.41.

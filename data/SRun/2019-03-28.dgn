@@ -1,0 +1,55 @@
+FORMAT-1.1
+2019-03-28T13:59:30Z
+BLS900
+4 41
+
+Station Code:     
+Network Name:     SPU-111-203
+Serial Number:    T-E-0656
+Software:         SRun 1.49
+Diagnosis Data
+Time # time # # T3 # 1
+Average XA (Corrected) # <XA>(c) #  # S # 17 # N/A
+Average YA (Corrected) # <YA>(c) #  # S # 18 # N/A
+Normalized Std.Dev. XA (Corrected) # nSigXA(c) #  # S # 17 # N/A
+Normalized Std.Dev. YA (Corrected) # nSigYA(c) #  # S # 18 # N/A
+Correlation XA/YA (Corrected) # corXAYA(c) #  # S # 19 # N/A
+Number of Samples # numSamples #  # S # 16 # N/A
+Average XA # <XA> #  # S # 17 # N/A
+Average YA # <YA> #  # S # 18 # N/A
+Average XB # <XB> #  # S # 20 # N/A
+Average YB # <YB> #  # S # 24 # N/A
+Std.Dev. XA # sigXA #  # S # 17 # N/A
+Std.Dev. YA # sigYA #  # S # 18 # N/A
+Std.Dev. XB # sigXB #  # S # 20 # N/A
+Std.Dev. YB # sigYB #  # S # 24 # N/A
+Minimum XA # minXA #  # S # 17 # N/A
+Minimum YA # minYA #  # S # 18 # N/A
+Minimum XB # minXB #  # S # 20 # N/A
+Minimum YB # minYB #  # S # 24 # N/A
+Maximum XA # maxXA #  # S # 17 # N/A
+Maximum YA # maxYA #  # S # 18 # N/A
+Maximum XB # maxXB #  # S # 20 # N/A
+Maximum YB # maxYB #  # S # 24 # N/A
+Correlation XA/YA # corXAYA #  # S # 19 # N/A
+Correlation XB/YB # corXBYB #  # S # 28 # N/A
+Correlation XA/XB # corXAXB #  # S # 21 # N/A
+Correlation YA/YB # corYAYB #  # S # 26 # N/A
+Correlation XA/YB # corXAYB #  # S # 25 # N/A
+Correlation YA/XB # corYAXB #  # S # 22 # N/A
+Crosswind # crosswind # m/s # S # 16 # N/A
+Crosswind Std.Dev. # sigCrosswind # m/s # S # 16 # N/A
+DMI Ground Voltage # dmiGndmV # mV # S # 0 # N/A
+Automatic Background SPU XA # autoBgSpuXA #  # S # 16 # N/A
+Automatic Background SPU YA # autoBgSpuYA #  # S # 16 # N/A
+Automatic Background SPU XB # autoBgSpuXB #  # S # 16 # N/A
+Automatic Background SPU YB # autoBgSpuYB #  # S # 16 # N/A
+Diagnosis Data Counter # dgnCounter #  # S # 16 # N/A
+Channel Flags XA # channelFlagsXA # SignalTooHigh Reserved Reserved Reserved NoSignal Misalignment Reserved Reserved Reserved Reserved ADRangeFailure Reserved Reserved Reserved Reserved OtherError Reserved Reserved Reserved Reserved Reserved Reserved Reserved Reserved UnidentifiedWarning UnidentifiedError # E # WIIIEEIIIIEIIIIEIIIIIIIIWE # 1
+Channel Flags YA # channelFlagsYA # SignalTooHigh Reserved Reserved Reserved NoSignal Misalignment Reserved Reserved Reserved Reserved ADRangeFailure Reserved Reserved Reserved Reserved OtherError Reserved Reserved Reserved Reserved Reserved Reserved Reserved Reserved UnidentifiedWarning UnidentifiedError # E # WIIIEEIIIIEIIIIEIIIIIIIIWE # 2
+Channel Flags XB # channelFlagsXB # SignalTooHigh Reserved Reserved Reserved NoSignal Misalignment Reserved Reserved Reserved Reserved ADRangeFailure Reserved Reserved Reserved Reserved OtherError Reserved Reserved Reserved Reserved Reserved Reserved Reserved Reserved UnidentifiedWarning UnidentifiedError # E # WIIIEEIIIIEIIIIEIIIIIIIIWE # 4
+Channel Flags YB # channelFlagsYB # SignalTooHigh Reserved Reserved Reserved NoSignal Misalignment Reserved Reserved Reserved Reserved ADRangeFailure Reserved Reserved Reserved Reserved OtherError Reserved Reserved Reserved Reserved Reserved Reserved Reserved Reserved UnidentifiedWarning UnidentifiedError # E # WIIIEEIIIIEIIIIEIIIIIIIIWE # 8
+Error Code # error # PulseMode Reserved Reserved Reserved NoSignal Misalignment SignalTooHigh Reserved ManyDgnInvalid AllDgnInvalid Cn2Saturation Cn2CorrectionFailed Reserved SomeMndInvalid Configuration Sensor Monitoring Background DMI WSP Acquisition Reserved Computation Reserved UnidentifiedWarning UnidentifiedError # E # IIIIWWWIWEWWIIEEEEEEEIEIWE # 16
+
+PT00H00M29S/2019-03-28T13:59:30Z	7784.9	6757.0	0.013436	0.015465	-0.002	14500	8834.4	7792.6	9071.0	7415.2	104.6	104.5	120.3	112.1	8416	7372	8589	6917	9211	8203	9546	7821	-0.002	-0.004	0.093	0.123	0.005	0.011	N/A	N/A	-7	1049.5	1035.6	1050.0	1097.8	1	0	0	0	0	0
+PT00H00M29S/2019-03-28T14:00:00Z	7772.4	6742.4	0.014050	0.016448	0.114	14500	8821.9	7778.0	9056.5	7403.7	109.2	110.9	123.8	118.7	8391	7260	8653	6966	9258	8238	9540	7864	0.114	0.075	0.132	0.202	0.073	0.093	0.00	0.22	-7	1049.5	1035.6	1050.0	1097.8	2	0	0	0	0	0

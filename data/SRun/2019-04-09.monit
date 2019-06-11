@@ -1,0 +1,42 @@
+FORMAT-1.1
+2019-04-09T08:08:00Z
+BLS900
+4 23
+
+Station Code:     Test
+Network Name:     SPU-111-203
+Serial Number:    T-E-0656
+Software:         SRun 1.49
+Monitoring Data
+Time # time # # T3 # 1
+SPU External Supply Voltage # spuVoltageExt # V # S # 0 # N/A
+SPU Internal Voltage +12V # spuVoltageInt+12V # V # S # 0 # N/A
+SPU Internal Voltage -12V # spuVoltageInt-12V # V # S # 0 # N/A
+SPU Internal Voltage +5V # spuVoltageInt+5V # V # S # 0 # N/A
+SPU Internal Voltage -5V # spuVoltageInt-5V # V # S # 0 # N/A
+SPU WSP Voltage +12V # spuVoltageWsp+12V # V # S # 0 # N/A
+SPU DMI Voltage +12V # spuVoltageDmi+12V # V # S # 0 # N/A
+SPU Receiver Voltage +12V # spuVoltageRec+12V # V # S # 0 # N/A
+SPU Receiver Voltage -12V # spuVoltageRec-12V # V # S # 0 # N/A
+SPU Cooling Fan (1=ok, 0=fail, 9=N/A) # spuCoolingFan #  # S # 0 # N/A
+SPU Temperature # spuTemperature # deg C # S # 0 # N/A
+SPU Relative Humidity # spuHumidity # % # S # 0 # N/A
+SPU Storage Used MB # spuStorageUsedMB # MByte # S # 0 # N/A
+SPU Storage Total MB # spuStorageTotalMB # MByte # S # 0 # N/A
+SPU Physical Memory Used MB # spuPhysicalMemoryUsedMB # MByte # S # 0 # N/A
+SPU Physical Memory Total MB # spuPhysicalMemoryTotalMB # MByte # S # 0 # N/A
+SPU Virtual Memory Used MB # spuVirtualMemoryUsedMB # MByte # S # 0 # N/A
+SPU Virtual Memory Total MB # spuVirtualMemoryTotalMB # MByte # S # 0 # N/A
+SPU Process Private Memory MB # spuProcessPrivateMemoryMB # MByte # S # 0 # N/A
+SPU Process Virtual Memory MB # spuProcessVirtualMemoryMB # MByte # S # 0 # N/A
+SPU Process Virtual Peak Memory MB # spuProcessVirtualPeakMemoryMB # MByte # S # 0 # N/A
+SPU Commit Memory Current MB # spuCommitMemoryCurrentMB # MByte # S # 0 # N/A
+SPU Commit Memory Limit MB # spuCommitMemoryLimitMB # MByte # S # 0 # N/A
+
+PT00H00M29S/2019-04-09T08:08:00Z	12.05	11.83	-12.10	5.05	-5.09	11.91	11.92	11.92	-11.93	1	N/A	N/A	36.6	6471.5	106.4	231.2	156.8	2047.9	46.6	156.8	170.2	129.6	218.6
+PT00H00M29S/2019-04-09T08:08:30Z	12.03	11.83	-12.08	5.06	-5.10	11.91	11.93	11.91	-11.93	1	N/A	N/A	36.7	6471.5	107.0	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
+PT00H00M29S/2019-04-09T08:09:00Z	12.04	11.81	-12.08	5.05	-5.10	11.92	11.93	11.95	-11.93	1	N/A	N/A	36.7	6471.5	107.1	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
+PT00H00M29S/2019-04-09T08:09:30Z	11.99	11.81	-12.09	5.06	-5.10	11.90	11.93	11.91	-11.93	1	N/A	N/A	36.7	6471.5	107.1	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
+PT00H00M29S/2019-04-09T08:10:00Z	12.04	11.80	-12.09	5.06	-5.10	11.90	11.93	11.92	-11.95	1	N/A	N/A	36.7	6471.5	107.1	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
+PT00H00M29S/2019-04-09T08:10:30Z	12.03	11.80	-12.10	5.05	-5.10	11.90	11.95	11.92	-11.94	1	N/A	N/A	36.7	6471.5	107.2	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
+PT00H00M29S/2019-04-09T08:11:00Z	12.04	11.82	-12.07	5.06	-5.10	11.91	11.93	11.93	-11.93	1	N/A	N/A	36.7	6471.5	107.1	231.2	157.1	2047.9	46.9	157.1	170.2	130.0	218.6
