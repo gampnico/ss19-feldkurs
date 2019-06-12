@@ -194,6 +194,7 @@ def ward_method(dataframe, eff_h, switch_time):
     """
     start = time.time()
     z_eff = eff_h
+    print("\nIteration started")
     # Initialise dataframe
     dataframe["obukhov"] = -100  # unstable conditions
     dataframe["shf"] = float

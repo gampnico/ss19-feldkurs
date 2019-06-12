@@ -1,0 +1,40 @@
+FORMAT-1.1
+2019-04-09T08:08:00Z
+BLS900
+4 24
+
+Station Code:     Test
+Network Name:     SPU-111-203
+Serial Number:    T-E-0656
+Software:         SRun 1.49
+Main Data
+Time # time # # T3 # 1
+Structure Function Constant of Refractive Index Fluctuations at Instrument Wavelength # Cn2 # m^(-2/3) # S # 1 # N/A
+Structure Function Constant of Temperature Fluctuations # CT2 # K^2 m^(-2/3) # S # 1 # N/A
+Heat Flux (Free Convection) # H_convection # W/m^2 # S # 1 # N/A
+Crosswind # crosswind # m/s # S # 1 # N/A
+Crosswind Std.Dev. # sigCrosswind # m/s # S # 1 # N/A
+Pressure # pressure # hPa # S # 0 # N/A
+Temperature # temp # deg C # S # 0 # N/A
+Relative Humidity # humidity # % # S # 0 # N/A
+Path Length # pathLength # m # S # 1 # N/A
+Path Height # pathHeight # m # S # 1 # N/A
+Cn2 Extinction/Outer Scale Correction Factor # correctCn2EO #  # S # 1 # N/A
+Cn2 Saturation Correction Factor # correctCn2Sat #  # S # 1 # N/A
+Cn2 Covariance Correction Factor # correctCn2Cov #  # S # 1 # N/A
+Main Data Counter # mndCounter #  # S # 1 # N/A
+Average XA (Corrected) # <XA>(c) #  # S # 1 # N/A
+Average YA (Corrected) # <YA>(c) #  # S # 1 # N/A
+Normalized Std.Dev. XA (Corrected) # nSigXA(c) #  # S # 1 # N/A
+Normalized Std.Dev. YA (Corrected) # nSigYA(c) #  # S # 1 # N/A
+Correlation XA/YA (Corrected) # corXAYA(c) #  # S # 1 # N/A
+Number of Valid Diagnosis Subperiods # numDgnValid #  # S # 1 # N/A
+Number of Valid Diagnosis Subperiods for Crosswind # numDgnValidCrosswind #  # S # 1 # N/A
+Total Number of Diagnosis Subperiods # numDgnTotal #  # S # 1 # N/A
+Combined Channel Flags # channelFlagsCombined # SignalTooHigh Reserved Reserved Reserved NoSignal Misalignment Reserved Reserved Reserved Reserved ADRangeFailure Reserved Reserved Reserved Reserved OtherError Reserved Reserved Reserved Reserved Reserved Reserved Reserved Reserved UnidentifiedWarning UnidentifiedError # E # WIIIEEIIIIEIIIIEIIIIIIIIWE # 2
+Error Code # error # PulseMode Reserved Reserved Reserved NoSignal Misalignment SignalTooHigh Reserved ManyDgnInvalid AllDgnInvalid Cn2Saturation Cn2CorrectionFailed Reserved SomeMndInvalid Configuration Sensor Monitoring Background DMI WSP Acquisition Reserved Computation Reserved UnidentifiedWarning UnidentifiedError # E # IIIIWWWIWEWWIIEEEEEEEIEIWE # 1
+
+PT00H00M29S/2019-04-09T08:08:00Z	2.0866E-15	2.1114E-03	87.5	1.98	0.92	1010.0	9.0	81	2645	81.60	0.983	1.012	N/A	1	10240.8	9818.1	0.055816	0.056294	0.114	1	1	1	0	0
+PT00H00M59S/2019-04-09T08:09:00Z	2.7054E-15	2.7377E-03	106.3	2.06	0.90	1010.0	9.0	81	2645	81.60	0.989	1.015	N/A	2	10251.4	9824.6	0.063007	0.064096	0.108	2	2	2	0	0
+PT00H00M59S/2019-04-09T08:10:00Z	2.6932E-15	2.7254E-03	106.0	2.34	0.85	1010.0	9.0	81	2645	81.60	1.028	1.014	N/A	3	10236.4	9808.3	0.060715	0.063648	0.073	2	2	2	0	0
+PT00H00M59S/2019-04-09T08:11:00Z	2.4273E-15	2.4562E-03	98.0	2.44	0.89	1010.0	9.0	81	2645	81.60	1.031	1.013	N/A	4	10264.4	9847.6	0.057378	0.060594	0.071	2	2	2	0	0
