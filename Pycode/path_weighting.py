@@ -76,6 +76,15 @@ def effective_z(path_height, path_position, b):
 
 
 def return_z_effective(location_name):
+    """Returns effective path height.
+
+    Args:
+        location_name (str): the name of the transmitter station
+
+    Returns:
+        effective_path_heights (dict): effective path heights for stable
+            and unstable conditions.
+    """
     if location_name.lower() == "h":
         location_name = "hungerburg"
     elif location_name.lower() in ["s", "schießstand"]:
@@ -86,19 +95,23 @@ def return_z_effective(location_name):
         path_string, header=None,
         names=["path_height", "norm_position"])
 
-    stability_factor = input("Please enter the stability conditions (stable, "
-                             "unstable, or other):\n")
-    effective_path_height = effective_z(
+    effective_path_height_stable = effective_z(
         path_height_data["path_height"], path_height_data["norm_position"],
-        stability_factor)
+        b="stable")
+    effective_path_height_unstable = effective_z(
+        path_height_data["path_height"], path_height_data["norm_position"],
+        b="unstable")
+
+    effective_path_heights = {"stable": effective_path_height_stable,
+                              "unstable": effective_path_height_unstable}
 
     mean_path_height = np.mean(path_height_data["path_height"])
     path_weight = pwf(path_height_data["norm_position"])
     path_height_data["path_weight"] = path_weight
 
     print("Mean path height: " + str(mean_path_height) + "m")
-    print("Effective path height: " + str(effective_path_height) + "m")
-    return effective_path_height
-    # For Matlab export
-    # path_height_data.to_csv(path_or_buf="../MATLAB/hungerburg_sim.csv",
-    #                         index=None)
+    print("Effective path height, stable: " + str(effective_path_heights[
+                                                      "stable"]) + "m")
+    print("Effective path height, unstable: " + str(effective_path_heights[
+                                                        "unstable"]) + "m")
+    return effective_path_heights
