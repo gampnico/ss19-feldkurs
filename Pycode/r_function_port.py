@@ -1,9 +1,10 @@
-import math
-import mpmath
+#!/usr/bin/env python3
+"""Python port of R functions used for processing scintillometer data.
+Original R functions by Helen Ward, port and minor editing by Nicolas
+Gampierakis (2019)."""
+
 import time
 
-mpmath.dps = 30
-mpmath.pretty = True
 # Scintillometer constants
 alpha11 = 4.9491e-2  # Equivalent to 4.48 * D^(7/3), BLS manual (App A.5)
 lamda = 880e-9  # BLS wavelength 880 nm
@@ -25,14 +26,19 @@ k = 0.4  # von K?rm?n's constant
 g = 9.81  # Acceleration due to gravity [m s^-2]
 
 
-# Useful functions
-# -------------------------------------------------------------
-# ----------------------------------------------------------------------------
-# FUNCTION: Calculates specific humidity (q) in kg kg^-3
-#   from relative humidity (RH) in %
-#        absolute temperature (Tabs) in K
-#        atmospheric pressure (P) in Pa
 def convert_rh_to_q(rh, temp_abs, pressure):
+    """Calculates specific humidity (q) in kg kg^-3
+
+    Args:
+        rh (float): relative humidity, %
+        temp_abs (float): absolute temperature, K
+        pressure (float): atmospheric pressure, P
+
+    Returns:
+        specific_humidity (float): specific humidity, %
+
+    """
+
     esat = 611.2 * math.exp(
         17.67 * (temp_abs - 273.16) / (temp_abs - 29.66))  # Stull
     q_abs = (ratio_rmm / (R_dry * temp_abs)) * rh / 100 * esat
@@ -41,35 +47,56 @@ def convert_rh_to_q(rh, temp_abs, pressure):
     return specific_humidity
 
 
-# ----------------------------------------------------------------------------
-# ----------------------------------------------------------------------------
-# FUNCTION: Integrated stability function for momentum for unstable conditions
-#   apply when Lob < 0
 def psi_m_unstable(obukhov, z):
-    # Lob   Obukhov Length / m
-    # z     Height / m
+    """Integrated stability function for momentum for unstable
+        conditions, for when obukhov <0
+
+    Args:
+        obukhov (float): Obukhov length, m
+        z (float): height, m
+
+    Returns:
+        pmu (float): value for instability function psi in unstable
+            conditions
+
+    """
+
     x = (1 - 16 * (z / obukhov)) ** (1 / 4)
     pmu = (2 * math.log((1 + x) / 2) + math.log((1 + x ** 2) / 2) -
            2 * math.atan(x) + math.pi / 2)
     return pmu
 
 
-# ----------------------------------------------------------------------------
-# FUNCTION: Integrated stability function for momentum for stable conditions
-#   apply when Lob > 0
 def psi_m_stable(obukhov, z):
-    # Lob   Obukhov Length / m
-    # z     Height / m
+    """Integrated stability function for momentum for stable conditions,
+
+    Args:
+        obukhov (float): Obukhov length, m
+        z (float): height, m
+
+    Returns:
+        pmu (float): value for instability function psi in stable
+            conditions
+
+    """
+
     pms = (-5) * z / obukhov
     return pms
 
 
-# ----------------------------------------------------------------------------
-# FUNCTION: Integrated stability function for either stability
-#   Uses stable function for Lob > 0; unstable otherwise (i.e. Lob < 0)
 def psi_m(obukhov, z):
-    # obukhov   Obukhov Length / m
-    # z     Height / m (e.g. (Zu - d), z0)
+    """Calculates stability function psi according to stability
+    conditions
+
+    Args:
+        obukhov (float): Obukhov length, m
+        z (float): height, m
+
+    Returns:
+        pm (float): psi value for instability function
+
+    """
+
     if obukhov > 0:
         pm = psi_m_stable(obukhov, z)
     else:
@@ -77,27 +104,45 @@ def psi_m(obukhov, z):
     return pm
 
 
-# ----------------------------------------------------------------------------
-
-
-# FUNCTION: Calculates friction velocity in m s-1
 def calc_u_star(u, z_u, z0, obukhov):
-    # u     Wind speed / m s^-1
-    # z_u    Height of wind speed measurement including displacement (z-d)
-    # zO    Roughness length for momentum / m
-    # obukhov   Obukhov length / m
+    """Calculates friction velocity u* in ms^-1
 
+    Args:
+        u (float): wind speed, ms^-1
+        z_u (float): height of wind speed measurement including
+            displacement (z-d), m
+        z0 (float): roughness length for momentum, m
+        obukhov (float): Obukhov length, m
+
+    Returns:
+        cus (float): friction velocity u*, ms^-1
+    """
     cus = k * u / (math.log(z_u / z0) - psi_m(obukhov, z=z_u)
                    + psi_m(obukhov, z=z0))
     return cus
 
 
-# ----------------------------------------------------------------------------
-
 def ward_iteration(dataframe, index, zm_bls):
+    """Calculates Obukhov length, friction velocity, and temperature
+    scale according to the method given in Helen Ward's scintillometry
+    lecture.
+
+    Args:
+        dataframe (pandas.DataFrame): dataframe containing variables
+            necessary for calculating returned variables
+        index (int): index of row being iterated over, i.e. time step
+            in time series
+        zm_bls (float): effective path height
+
+    Returns:
+        obukhov_new (float): computed obukhov length for the given time
+            and conditions
+
+    """
+
     con_T1 = 4.9  # 4.9
     con_T2 = 6.1  # 9.0
-    con_T3 = 2.2  # 0
+    # con_T3 = 2.2  # 0
     iteration_step = 0
     z0 = zm_bls * 0.1
 
@@ -128,7 +173,25 @@ def ward_iteration(dataframe, index, zm_bls):
         return obukhov_new
 
 
-def ward_method(dataframe, eff_h):
+def ward_method(dataframe, eff_h, switch_time):
+    """Overarching function for calculating Obukhov lengths and sensible
+    heat fluxes as a time series.
+
+    Args:
+        dataframe (pandas.DataFrame): dataframe containing data
+            necessary for deriving fluxes
+        eff_h (dict): contaings effective path heights for stable and
+            unstable conditions
+        switch_time (string): the time at which the atmosphere switches
+            from stable to unstable conditions. This must be estimated
+            manually.
+
+    Returns:
+        dataframe (pandas.DataFrame): dataframe with additional data for
+            Obukhov lengths, sensible heat fluxes, frictional velocity,
+            and temperature scale
+
+    """
     start = time.time()
     z_eff = eff_h
     # Initialise dataframe
@@ -138,9 +201,18 @@ def ward_method(dataframe, eff_h):
     dataframe["theta_star"] = float
     dataframe["obukhov_diff"] = float
     dataframe["shf_diff"] = float
-    for index, row in dataframe.iterrows():
-        obukhov = ward_iteration(dataframe, index, z_eff)
-        dataframe.loc[index, "obukhov"] = obukhov
+
+    dataframe_stable = dataframe.iloc[
+        dataframe.index.indexer_between_time("00:00", switch_time)]
+    for index, row in dataframe_stable.iterrows():
+        obukhov = ward_iteration(dataframe_stable, index, z_eff["stable"])
+        dataframe_stable.loc[index, "obukhov"] = obukhov
+    dataframe_unstable = dataframe.iloc[
+        dataframe.index.indexer_between_time(switch_time, "23:59")]
+    for index, row in dataframe_unstable.iterrows():
+        obukhov = ward_iteration(dataframe_stable, index, z_eff["unstable"])
+        dataframe_unstable.loc[index, "obukhov"] = obukhov
+    dataframe = dataframe_stable.append(dataframe_unstable)
     end = time.time()
     print(str(end - start) + "s")
     print("\nIteration completed!")
