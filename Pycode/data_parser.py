@@ -7,6 +7,7 @@ import pathlib
 import download_weather as dw
 import pandas as pd
 import os
+import numpy as np
 
 
 def scintillometer_parse(filename):
@@ -105,16 +106,19 @@ def weather_parsing(day):
             minute-interval weather observations for university rooftop.
         """
 
-    header_list = ["Datetime", "airtemp", "airtemp_hygro", "soiltemp+0.5m",
-                   "soiltemp-.1m", "soiltemp-0.2m", "soiltemp-0.5m",
-                   "dewpoint", "relhum", "relhum_hygro", "prcp_weight",
-                   "prcp", "pressure", "sunshine_duration", "global_rad",
-                   "diffuse_sky_rad", "windspeed_scalar", "windspeed_vector",
-                   "winddir", "windspeed_max", "gustdir", "shm30"]
-
-    weather_data = pd.read_csv("../../data/weather_data/data_TAWES_UIBK.csv",
-                               header=None, skiprows=2, index_col=0,
-                               parse_dates=True, names=header_list, sep=";")
+    header_list = ["datetime", "temperature", "rftp", "dew_point", "rel_hum",
+                   "winddir", "windspeed", "gustdir", "gustspeed",
+                   "base_pressure", "pressure", "sun", "precipitation"]
+    weather_data = pd.read_csv("../../data/weather_data/TAWES_UIBK_Ertel.csv",
+                               header=None, skiprows=1, index_col=0,
+                               parse_dates=True, names=header_list, sep="\t")
+    weather_data = weather_data.replace(-999, np.nan)
+    weather_data = weather_data.fillna(method="ffill")
+    weather_data["pressure"] = weather_data["pressure"] / 10  # convert to mb
     weather_data = weather_data.loc[day]
+    oidx = weather_data.index
+    nidx = pd.date_range(oidx.min(), oidx.max(), freq='60s')
+    weather_data = weather_data.reindex(oidx.union(nidx)).interpolate(
+        'index').reindex(nidx).tz_localize("UTC")
 
     return weather_data

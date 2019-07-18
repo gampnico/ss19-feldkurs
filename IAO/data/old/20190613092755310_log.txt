@@ -1,0 +1,15 @@
+site name:
+Botanikerstraße adjusted zm
+------------------------------------
+Your file ffp_export.csv has been uploaded.
+Job started with id: 20190613092755310
+
+------------------------------------
+flux tower coordinates:
+47.267209
+11.379892
+------------------------------------
+
+FFP run start: Thu Jun 13 10:28:05 BST 2019
+
+FFP finished: Thu Jun 13 10:30:11 BST 2019

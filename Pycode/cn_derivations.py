@@ -19,20 +19,25 @@ def derive_ct2(data_file):
             alongside weather conditions
     """
     scint_data = dp.scintillometer_parse(data_file)
-
+    scint_data["Cn2"] = (scint_data["Cn2"]) / 2032 ** (-3) * 1031.5 ** (-3)
     # scrub extra characters from file name
     day = re.sub("[^0-9\-]", "", data_file)
     # placeholder until we can access acinn data
-    acinn_data = dp.weather_download(day, "off")
+    # acinn_data = dp.weather_download(day, "off")
+    acinn_data = dp.weather_download(day)
+
 
     derived = scint_data.filter(["Cn2"], axis=1)
     kelvin = 273.15
     # merge weather and scintillometer data according to datetimes
+    # derived = derived.join(acinn_data[["temperature", "pressure",
+    #                                    "windspeed"]])
     derived = derived.join(acinn_data[["t", "ldred", "wg", "wr"]]).rename(
         columns={"t": "temperature", "ldred": "pressure", "wg": "windspeed",
                  "wr": "wind_dir"})
-    # adjust values
+    # # adjust values
     derived["temperature"] = derived["temperature"] + kelvin
+    derived["pressure"] = derived["pressure"]  # convert to Pa
     derived["windspeed"] = derived["windspeed"] / 3.6  # convert to ms^-1
 
     transmit_lambda = 880 * (10 ** -9)  # m

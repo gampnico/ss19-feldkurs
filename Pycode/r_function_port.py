@@ -33,7 +33,7 @@ g = 9.81  # Acceleration due to gravity [m s^-2]
 #        absolute temperature (Tabs) in K
 #        atmospheric pressure (P) in Pa
 def convert_rh_to_q(rh, temp_abs, pressure):
-    esat = 611.2 * math.exp(
+    esat = 611.2 * mpmath.exp(
         17.67 * (temp_abs - 273.16) / (temp_abs - 29.66))  # Stull
     q_abs = (ratio_rmm / (R_dry * temp_abs)) * rh / 100 * esat
     r = R_dry / (1 - q_abs * temp_abs / pressure * (R_vapour - R_dry))
@@ -50,7 +50,7 @@ def psi_m_unstable(obukhov, z):
     # z     Height / m
     x = (1 - 16 * (z / obukhov)) ** (1 / 4)
     pmu = (2 * math.log((1 + x) / 2) + math.log((1 + x ** 2) / 2) -
-           2 * math.atan(x) + math.pi / 2)
+           2 * mpmath.atan(x) + math.pi / 2)
     return pmu
 
 
@@ -128,12 +128,33 @@ def ward_iteration(dataframe, index, zm_bls):
         return obukhov_new
 
 
-def ward_method(dataframe, eff_h):
+def ward_method(dataframe, eff_h, stability):
+    """Overarching function for calculating Obukhov lengths and sensible
+      heat fluxes as a time series.
+
+      Args:
+          dataframe (pandas.DataFrame): dataframe containing data
+              necessary for deriving fluxes
+          eff_h (dict): contaings effective path heights for stable and
+              unstable conditions
+          switch_time (string): the time at which the atmosphere switches
+              from stable to unstable conditions. This must be estimated
+              manually.
+
+      Returns:
+          dataframe (pandas.DataFrame): dataframe with additional data for
+              Obukhov lengths, sensible heat fluxes, frictional velocity,
+              and temperature scale
+
+      """
     start = time.time()
     z_eff = eff_h
     print("\nIteration started")
     # Initialise dataframe
-    dataframe["obukhov"] = -100  # unstable conditions
+    if stability == "unstable":
+        dataframe["obukhov"] = -100  # unstable conditions
+    else:
+        dataframe["obukhov"] = 200  # stable conditions
     dataframe["shf"] = float
     dataframe["u_star"] = float
     dataframe["theta_star"] = float

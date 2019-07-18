@@ -1,0 +1,7 @@
+1 Trees
+2 Short veg.
+3 Water
+4 Rail
+5 Road
+6 Paved
+7 Buildings

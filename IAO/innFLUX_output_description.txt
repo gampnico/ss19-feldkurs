@@ -1,0 +1,63 @@
+time		absolute time (MATLAB time)
+hour		hour of day (i.e. hours since 00:00)
+freq			frequency axis for cospectra (bin averaged) [1/s]
+MET				structure containing meteorological data
+MET.uvw			mean wind speed components u, v, w with u component rotated into direction of mean wind [m/s]
+MET.std_uvw		standard deviations for wind speed components u, v, w [m/s]
+MET.hws			mean horizontal wind speed [m/s]
+MET.wdir		mean horizontal wind direction [deg]
+MET.tilt.P		angle-dependent angle of attack correction matrix
+MET.uw			covariance of along-wind and vertical wind component, <u'w'> [m^2/s^2]
+MET.vw			covariance of cross-wind and vertical wind component, <v'w'> [m^2/s^2]
+MET.uv			covariance of along-wind and cross-wind component, <u'v'> [m^2/s^2]
+MET.ust			friction velocity, u* [m/s]
+MET.T			mean temperature [K]
+MET.std_T		standard deviation of temperature [K]
+MET.wT			buoyancy flux [K*m/s]
+MET.L			Obukhov length [m]
+MET.zoL			stability parameter z/L
+MET.cospec_wT	cospectrum for wT (f*Co)
+MET.p			pressure [hPa]
+MET.theta		potential temperature [K]
+MET.theta_v		virtual potential temperature [K]
+MET.wtheta		potential temperature (heat) flux, <w'theta'> [K*m/s]
+MET.wtheta_v	vitual potential temperature (buoyancy) flux, <w'theta_v'> [K*m/s]
+MET.qaqc				structure containing QA/QC data
+MET.qaqc.completeness	fraction of sonic data used in this interval
+MET.qaqc.SST_wT			steady state test for wT (relative deviation from model)
+MET.qaqc.ITC_w			integral turbulence characteristics, sigma(w)
+MET.qaqc.ITC_u			integral turbulence characteristics, sigma(u)
+MET.qaqc.ITC_T			integral turbulence characteristics, sigma(T)
+IRGA				structure containing infrared gas analyzer data
+IRGA.CO2			mean CO2 concentration [ppmv]
+IRGA.std_CO2		standard deviation of CO2 concentration [ppmv]
+IRGA.lagtime_CO2	lag time of CO2 signal at maximum covariance [s]
+IRGA.flux_CO2		CO2 flux [nmol/m^2/s]
+IRGA.cospec_CO2		cospectrum for CO2 (f*Co)
+IRGA.H2O			mean H2O concentration [permillv]
+IRGA.std_H2O		standard deviation of H2O concentration [permillv]
+IRGA.lagtime_H2O	lag time of H2O signal at maximum covariance [s]
+IRGA.flux_H2O		H2O flux [nmol/m^2/s]
+IRGA.cospec_H2O		cospectrum for H2O (f*Co)
+IRGA.qaqc					structure containing QA/QC data for IRGA
+IRGA.qaqc.completeness		fraction of IRGA data used in this interval
+IRGA.qaqc.SST_wCO2			steady state test for wCO2 (relative deviation from model)
+IRGA.qaqc.SST_wH2O			steady state test for wH2O (relative deviation from model)
+IRGA.qaqc.flux_SNR_CO2		CO2 flux signal to noise ratio (individual averaging interval)
+IRGA.qaqc.flux_noise_CO2	CO2 flux noise far off integral time scale (individual averaging interval)
+IRGA.qaqc.flux_SNR_H2O		H2O flux signal to noise ratio (individual averaging interval)
+IRGA.qaqc.flux_noise_H2O	H2O flux noise far off integral time scale (individual averaging interval)
+TRACER						structure containing results for each tracer
+TRACER(i).name				compound's name / chemical formula
+TRACER(i).mean				mean tracer concentration [ppb]
+TRACER(i).std				standard deviation of tracer concentration [ppb]
+TRACER(i).lagtime1			lag time determined from individual averaging interval [s]
+TRACER(i).flux1				flux using lagtime1 [nmol/m^2/s]
+TRACER(i).lagtime2			lag time determined from cumulated covariances [s]
+TRACER(i).flux2				flux using lagtime2 [nmol/m^2/s]
+TRACER(i).cospec			cospectrum (f*Co)
+TRACER(i).qaqc				structure containing QA/QC data for tracer
+TRACER(i).qaqc.completeness	fraction of tracer data used in this interval
+TRACER(i).qaqc.SST			steady state test
+TRACER(i).qaqc.flux_SNR		flux signal to noise ratio (individual averaging interval)
+TRACER(i).qaqc.flux_noise	flux noise far off integral time scale (individual averaging interval)

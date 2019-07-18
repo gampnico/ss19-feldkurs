@@ -1,0 +1,15 @@
+site name:
+Botaniker_hq3
+------------------------------------
+Your file ffp_hq3.csv has been uploaded.
+Job started with id: 20190618114259310
+
+------------------------------------
+flux tower coordinates:
+47.268514
+11.37736
+------------------------------------
+
+FFP run start: Tue Jun 18 12:43:09 BST 2019
+
+FFP finished: Tue Jun 18 12:45:19 BST 2019
