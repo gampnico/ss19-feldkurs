@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Nicolas Gampierakis (2019). Derives CT^2.
+"""Nicolas Gampierakis (2019). Derives CT^2 from parsed scintillometer
+data and calculates fluxes.
 """
 
 import re
@@ -59,6 +60,16 @@ def derive_ct2(data_file):
 
 
 def kinematic_shf(dataframe, z_eff):
+    """Calculate kinematic surface heat flux.
+
+    Args:
+        dataframe (pandas.DataFrame): contains weather conditions and
+            scintillometer data
+
+    Returns:
+        dataframe (pandas.DataFrame): includes additional column for
+            kinematic surface heat flux
+    """
     k = 0.4  # von Karman constant
     g = 9.81
     dataframe["Q_0"] = 1.165 * k * z_eff * (
@@ -68,11 +79,40 @@ def kinematic_shf(dataframe, z_eff):
 
 
 def compute_fluxes(file_name, z_eff):
+    """Merges weather data, derives CT2, computes various fluxes incl.
+    free convection.
+
+    Args:
+        file_name (str): the name of the file, without extension. Should
+            be .mnd format with a date within the file name
+        z_eff (dict): dictionary containing effective path heights for
+            stable and unstable conditions
+
+    Returns:
+        dataframe (pandas.DataFrame): modified dataframe with columns
+            containing the fluxes calculated for the time series
+
+    """
+
     r_d = 287.05  # J kg^-1 K^-1, specific gas constant for dry air
     cp = 1004  # J kg^-1 K^-1, heat capacity of air
+
+    switch_time = input("\nPlease enter the time at which stable"
+                        " switches to unstable: ")
+
     dataframe = derive_ct2(file_name)
-    # Calculate kinematic surface heat flux
-    dataframe = kinematic_shf(dataframe, z_eff)
+
+    # Calculate kinematic surface heat flux for stable conditions
+
+    dataframe_stable = dataframe.iloc[
+        dataframe.index.indexer_between_time("00:00", switch_time)]
+    dataframe_stable = kinematic_shf(dataframe_stable, z_eff["stable"])
+    dataframe_unstable = dataframe.iloc[
+        dataframe.index.indexer_between_time(switch_time, "23:59")]
+    dataframe_unstable = kinematic_shf(dataframe_unstable, z_eff["unstable"])
+
+    dataframe = dataframe_stable.append(dataframe_unstable)
+
     # Air density
     dataframe["rho_air"] = 100 * dataframe["pressure"] / (
             r_d * dataframe["temperature"])
@@ -84,9 +124,24 @@ def compute_fluxes(file_name, z_eff):
 
 
 def data_processor(filename, station):
+    """Overarching function handling data post-processing.
+
+    Args:
+        filename (str): the name of the file, without extension. Should
+            be .mnd format with a date within the file name
+        station (str): the name of the transmitter station
+
+    Returns:
+        processed_data (dict): contains dataframe with calculated fluxes
+        and effective path heights under various conditions
+    """
     # Get effective path height
     z_eff = pw.return_z_effective(station)
     # Derive CT2, merge weather data, calculate free convection fluxes
+
+    # input hour in format str(2204)
+
     dataframe = compute_fluxes(filename, z_eff)
-    processed_data = {"computed": dataframe, "effective_height": z_eff}
+    processed_data = {"computed": dataframe, "z_eff_stable": z_eff[
+        "stable"], "z_eff_unstable": z_eff["unstable"]}
     return processed_data
