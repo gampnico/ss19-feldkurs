@@ -1,10 +1,10 @@
 # Processing Scintillometry Data in Complex Terrain
 
-This project has moved to [gampnico/scintillometry-tools](https://github.com/gampnico/scintillometry-tools), where it has been rewritten from scratch.
+This project has moved to [gampnico/scintillometry](https://github.com/gampnico/scintillometry), where it has been rewritten from scratch.
 
 This repository has been archived. It was written a long time ago for a field course with a very strict deadline, and what spaghetti code remained is now deprecated with little utility. If you have any existing forks or local clones, **please delete them**.
 
-If you are interested in an updated package for analysing BLS scintillometer measurements, please consider the new [Scintillometry-Tools](https://github.com/gampnico/scintillometry-tools) package.
+If you are interested in an updated package for analysing BLS scintillometer measurements, please consider the new [Scintillometry](https://github.com/gampnico/scintillometry) package.
 
 
 # Feature History
