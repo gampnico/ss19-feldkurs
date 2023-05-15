@@ -1,6 +1,6 @@
 # Processing Scintillometry Data in Complex Terrain
 
-This project has moved to [gampnico/scintillometry-tools](https://github.com/gampnico/sinctillometry-tools), where it has been rewritten from scratch.
+This project has moved to [gampnico/scintillometry-tools](https://github.com/gampnico/scintillometry-tools), where it has been rewritten from scratch.
 
 This repository has been archived. It was written a long time ago for a field course with a very strict deadline, and what spaghetti code remained is now deprecated with little utility. If you have any existing forks or local clones, **please delete them**.
 
